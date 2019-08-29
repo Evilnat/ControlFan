@@ -11,7 +11,7 @@ endif
 #  TITLE, APPID, CONTENTID, ICON0 SFOXML before ppu_rules.
 #---------------------------------------------------------------------------------
 ICON0       :=  ICON0.PNG
-TITLE		:=	Control Fan Utility [v4.83 Unofficial]
+TITLE		:=	Control Fan Utility [v4.85 Unofficial]
 APPID		:=	CTRLFAN00
 CONTENTID	:=	UP0001-$(APPID)_00-00PKG0BY0EVILNAT
 

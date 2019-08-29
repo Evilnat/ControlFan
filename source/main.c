@@ -197,15 +197,23 @@ int load_ps3_controlfan_payload()
      else if(cfw == 0x481C)     
         syscall_base = 0x8000000000363BE0ULL;    
      else if(cfw == 0x481D)     
-        syscall_base = 0x800000000038A4E8ULL;    
-     else if(cfw == 0x481C)     
-        syscall_base = 0x8000000000363BE0ULL;    
-     else if(cfw == 0x482D)     
-        syscall_base = 0x800000000038A4E8ULL;    
+        syscall_base = 0x800000000038A4E8ULL;   
      else if(cfw == 0x482C)     
         syscall_base = 0x8000000000363BE0ULL; 
+     else if(cfw == 0x482D)     
+        syscall_base = 0x800000000038A4E8ULL; 
      else if(cfw == 0x483C)     
         syscall_base = 0x8000000000363BE0ULL;   
+     else if(cfw == 0x483D)     
+        syscall_base = 0x800000000038A4E8ULL;
+     else if(cfw == 0x484C)     
+        syscall_base = 0x8000000000363BE0ULL;  
+     else if(cfw == 0x484D)     
+        syscall_base = 0x800000000038A4E8ULL;
+     else if(cfw == 0x485C)     
+        syscall_base = 0x8000000000363BE0ULL;  
+     else if(cfw == 0x485D)     
+        syscall_base = 0x800000000038A4E8ULL;
      else exit(0);
 
     if(!addr) {
@@ -935,6 +943,114 @@ int load_ps3_controlfan_payload()
         
         ret = 1;
     }
+
+    // Firmware 4.83
+    else if(cfw == 0x483C) 
+    { 
+        // enables sys_game_get_temperature
+        lv2poke32(0x800000000000C6A8ULL, 0x38600000); // sys 383
+
+        // enables sys_sm_get_fan_policy
+        lv2poke32(0x8000000000009E38ULL, 0x38600001); // sys 409
+
+        // enables sys_sm_set_fan_policy
+        lv2poke32(0x800000000000A334ULL, 0x38600001); // sys 389
+
+        // enables sys_set_leds
+        lv2poke32(0x800000000000A3FCULL, 0x38600001); // sys 386
+        
+        ret = 1;
+    }
+
+    // Firmware 4.83 DEX
+    else if(cfw == 0x483D) 
+    { 
+        // enables sys_game_get_temperature
+        lv2poke32(0x800000000000C728ULL, 0x38600000); // sys 383
+
+        // enables sys_sm_get_fan_policy
+        lv2poke32(0x8000000000009EB8ULL, 0x38600001); // sys 409
+
+        // enables sys_sm_set_fan_policy
+        lv2poke32(0x800000000000A3B4ULL, 0x38600001); // sys 389
+
+        // enables sys_set_leds
+        lv2poke32(0x800000000000A47CULL, 0x38600001); // sys 386
+        
+        ret = 1;
+    }
+
+    // Firmware 4.84
+    else if(cfw == 0x484C) 
+    { 
+        // enables sys_game_get_temperature
+        lv2poke32(0x800000000000C6A8ULL, 0x38600000); // sys 383
+
+        // enables sys_sm_get_fan_policy
+        lv2poke32(0x8000000000009E38ULL, 0x38600001); // sys 409
+
+        // enables sys_sm_set_fan_policy
+        lv2poke32(0x800000000000A334ULL, 0x38600001); // sys 389
+
+        // enables sys_set_leds
+        lv2poke32(0x800000000000A3FCULL, 0x38600001); // sys 386
+        
+        ret = 1;
+    }
+
+    // Firmware 4.84 DEX
+    else if(cfw == 0x484D) 
+    { 
+        // enables sys_game_get_temperature
+        lv2poke32(0x800000000000C728ULL, 0x38600000); // sys 383
+
+        // enables sys_sm_get_fan_policy
+        lv2poke32(0x8000000000009EB8ULL, 0x38600001); // sys 409
+
+        // enables sys_sm_set_fan_policy
+        lv2poke32(0x800000000000A3B4ULL, 0x38600001); // sys 389
+
+        // enables sys_set_leds
+        lv2poke32(0x800000000000A47CULL, 0x38600001); // sys 386
+        
+        ret = 1;
+    }
+
+    // Firmware 4.85
+    else if(cfw == 0x485C) 
+    { 
+        // enables sys_game_get_temperature
+        lv2poke32(0x800000000000C6A8ULL, 0x38600000); // sys 383
+
+        // enables sys_sm_get_fan_policy
+        lv2poke32(0x8000000000009E38ULL, 0x38600001); // sys 409
+
+        // enables sys_sm_set_fan_policy
+        lv2poke32(0x800000000000A334ULL, 0x38600001); // sys 389
+
+        // enables sys_set_leds
+        lv2poke32(0x800000000000A3FCULL, 0x38600001); // sys 386
+        
+        ret = 1;
+    }
+
+    // Firmware 4.85 DEX
+    else if(cfw == 0x485D) 
+    { 
+        // enables sys_game_get_temperature
+        lv2poke32(0x800000000000C728ULL, 0x38600000); // sys 383
+
+        // enables sys_sm_get_fan_policy
+        lv2poke32(0x8000000000009EB8ULL, 0x38600001); // sys 409
+
+        // enables sys_sm_set_fan_policy
+        lv2poke32(0x800000000000A3B4ULL, 0x38600001); // sys 389
+
+        // enables sys_set_leds
+        lv2poke32(0x800000000000A47CULL, 0x38600001); // sys 386
+        
+        ret = 1;
+    }
     
 skip_the_load:
     free(addr);
@@ -1133,10 +1249,15 @@ s32 main(s32 argc, const char* argv[])
     else if(uval == 0x800000000034FBB0ULL) cfw = 0x482C; 
     else if(uval == 0x80000000003759C0ULL) cfw = 0x482D; 
     else if(uval == 0x800000000034FBB0ULL) cfw = 0x483C;
+    else if(uval == 0x80000000003759C0ULL) cfw = 0x483D; 
+    else if(uval == 0x800000000034FBB0ULL) cfw = 0x484C;
+    else if(uval == 0x80000000003759C0ULL) cfw = 0x484D; 
+    else if(uval == 0x800000000034FBB0ULL) cfw = 0x485C;
+    else if(uval == 0x80000000003759C0ULL) cfw = 0x485D; 
 
     if(!cfw) 
     {
-         DrawString(24, 56+24, "You need a CFW CEX/DEX 3.41, 3.55, 4.21, 4.30, 4.31, 4.40, 4.41, 4.46, 4.50,\n  4.53, 4.55, 4.60, 4.65, 4.66, 4.70, 4.75, 4.76, 4.78, 4.80, 4.81, 4.82\n  or 4.83 to work");
+         DrawString(24, 56+24, "You need a CFW CEX/DEX 3.41, 3.55, 4.21, 4.30, 4.31, 4.40, 4.41, 4.46, 4.50,\n  4.53, 4.55, 4.60, 4.65, 4.66, 4.70, 4.75, 4.76, 4.78, 4.80, 4.81, 4.82, 4.83, 4.84\n  or 4.85 to work");
          tiny3d_Flip();
          sleep(10);
          exit(0);
