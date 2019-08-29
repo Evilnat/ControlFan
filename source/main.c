@@ -961,6 +961,7 @@ int load_ps3_controlfan_payload()
         
         ret = 1;
     }
+<<<<<<< HEAD
 
     // Firmware 4.83 DEX
     else if(cfw == 0x483D) 
@@ -1051,6 +1052,8 @@ int load_ps3_controlfan_payload()
         
         ret = 1;
     }
+=======
+>>>>>>> f9f0cdc0454d9d1f64ebde38bd8c90b8277645cc
     
 skip_the_load:
     free(addr);
